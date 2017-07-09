@@ -1,0 +1,71 @@
+{
+	"main": "ocr.op.product.App",
+	"options": {
+		"config": {
+			"app_id": 11,
+			"version_id": 11,
+            "service_name": "ocr-op-product-center", 
+ 			"app_inst_group": "product01",
+            "app_desc": "平台产品管理服务", 
+            "isolation_vertx_pool": false, 
+            "run_webserver": false, 
+            "webserver_config": {
+                "webserver_port": 8080, 
+                "eventbus_enabled": true, 
+                "static_res_service": true, 
+                "delivery_options": {
+                    "timeout": 60000
+                }
+            }, 
+            "api_register_server": {
+                "webserver_name": "121webserver-N01"
+            }, 
+			"sessionservice_config": {
+				"expire_seconds": 1800,
+				"redis_options": {
+					"host": "127.0.0.1",
+					"port": 6379
+				}
+			},
+            "sys_datasource": {
+                "config": {
+                    "max_pool_size": 30, 
+                    "user": "root", 
+                    "password": "root", 
+                    "driver_class": "com.mysql.jdbc.Driver", 
+                    "url": "jdbc:mysql://127.0.0.1:3306/121db_new?useUnicode=true&characterEncoding=UTF-8"
+                }, 
+                "sharedpool": "jdbc-ocr"
+            }, 
+            "app_datasource": {
+                "data_sharding_policy": "sharding", 
+                "config": {
+                    "db_name": "121ocr", 
+                    "connection_string": "mongodb://127.0.0.1:27017"
+                }, 
+                "sharedpool": "mongo-ocr"
+            }, 
+            "inst_config": { }, 
+            "inst_common": {
+                "component_common": { }, 
+                "component_config": {
+                    "supplyrelation-mgr": {
+                        "options": {
+                            "config": {
+                                "dependencies": {
+                                    "inventorycenter_service": {
+                                        "service_name": "ocr-inventorycenter"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "component_deployment": [ ]
+            }, 
+            "component_config": { }, 
+            "component_deployment": [ ], 
+            "component_common": { }
+        }
+	}
+}
