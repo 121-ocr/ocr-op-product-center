@@ -1,0 +1,92 @@
+[
+{   
+    "id":"GC01",   
+    "text":"日常百货",   
+    "attributes":{   
+	    "code": "GC01",
+	    "name": "日常百货",
+		"inner_code": "GC01"
+	},
+	"state": "closed",
+    "children":[
+    	{   
+		    "id":"GC0101",   
+		    "text":"家居生活",   
+		    "attributes":{   
+			    "code": "GC0101",
+			    "name": "家居生活",
+				"inner_code": "GC0101"
+			}
+    	},
+    	{   
+    		"id": "GC0102",
+        	"text":"厨房器具",
+        	"attributes":{   
+	            "code": "GC0102",
+	            "name": "厨房器具",
+	            "inner_code": "GC0102" 
+	        }
+    	}
+    ]
+},
+{   
+    "id":"GC02",   
+    "text":"进口美食",   
+    "attributes":{   
+	    "code": "GC02",
+	    "name": "进口美食",
+		"inner_code": "GC02"
+	},
+	"state": "closed",
+    "children":[
+    	{   
+		    "id":"GC0201",   
+		    "text":"冲调饮品",   
+		    "attributes":{   
+			    "code": "GC0201",
+			    "name": "冲调饮品",
+				"inner_code": "GC0201"
+			}
+    	},
+    	{   
+    		"id": "GC0202",
+        	"text":"休闲零食",
+        	"attributes":{   
+	            "code": "GC0202",
+	            "name": "休闲零食",
+	            "inner_code": "GC0202" 
+	        }
+    	}
+    ]
+},
+{   
+    "id":"GC03",   
+    "text":"酒饮专区",   
+    "attributes":{   
+	    "code": "GC03",
+	    "name": "酒饮专区",
+		"inner_code": "GC03"
+	},
+	"state": "closed",
+    "children":[
+    	{   
+		    "id":"GC0301",   
+		    "text":"红酒",   
+		    "attributes":{   
+			    "code": "GC0301",
+			    "name": "红酒",
+				"inner_code": "GC0301"
+			}
+    	},
+    	{   
+    		"id": "GC0302",
+        	"text":"果汁",
+        	"attributes":{   
+	            "code": "GC0302",
+	            "name": "果汁",
+	            "inner_code": "GC0302" 
+	        }
+    	}
+    ]
+}
+]

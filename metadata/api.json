@@ -1,0 +1,55 @@
+一、商品分类树查询
+message api：ocr-goods-center.sales-catelog-mgr.findtree
+rest api: ocr-goods-center/sales-catelog-mgr/findtree, http: GET
+input: 
+output: vo[ba_sales_catelogs_tree]
+
+一、商品列表查询
+message api：ocr-goods-center.goods-mgr.findall
+rest api: ocr-goods-center/goods-mgr/findall, http: GET
+input: 
+分页查询参数
+{ fields: {},  //返回字段
+   paging: {
+      sort_field: 排序字段，只支持单个字段,
+      sort_direction: 1：升序，-1：降序,
+      page_number: 页码,
+      page_size: 每页大小,
+      total: 总数，下次需要回传
+      total_page: 总页数，下次需要回传
+   },
+   query: {}  //其他条件  
+}
+output: 
+分页查询返回
+{
+   "total": 总数量
+   "total_page": 总页数,
+   "datas" vo[ba_goods] 商品数组
+}
+
+
+二、单个商品查询
+message api：ocr-goods-center.goods-mgr.findone
+rest api: ocr-goods-center/goods-mgr/findone, http: POST
+input: 
+分页查询参数
+{ fields: {},  //返回字段
+   paging: {
+      sort_field: 排序字段，只支持单个字段,
+      sort_direction: 1：升序，-1：降序,
+      page_number: 页码,
+      page_size: 每页大小,
+      total: 总数，下次需要回传
+      total_page: 总页数，下次需要回传
+   },
+   query: {}  //其他条件  
+}
+output: 
+分页查询返回
+{
+   "total": 总数量
+   "total_page": 总页数,
+   "datas" vo[ba_goods] 商品数组
+}
+
