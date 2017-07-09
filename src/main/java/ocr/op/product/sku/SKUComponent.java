@@ -1,4 +1,4 @@
-package ocr.op.product.category;
+package ocr.op.product.sku;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,25 +8,26 @@ import otocloud.framework.core.OtoCloudEventDescriptor;
 import otocloud.framework.core.OtoCloudEventHandlerRegistry;
 
 /**
- * TODO: 产品分类管理
- * @date 2015年11月15日
+ * TODO: 商品管理组件
+ * @date 2016年11月26日
  * @author lijing
  */
-public class CategoryComponent extends AppActivityImpl {
+public class SKUComponent extends AppActivityImpl {
 
 	//业务活动组件名
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "sales-catelog-mgr";
+		return "product-sku";
 	}
 	
 	//业务活动组件要处理的核心业务对象
 	@Override
 	public String getBizObjectType() {
 		// TODO Auto-generated method stub
-		return "ba_sales_catelogs";
+		return "p_ba_product_sku";
 	}
+
 
 	//发布此业务活动对外暴露的业务事件
 	@Override
@@ -41,10 +42,21 @@ public class CategoryComponent extends AppActivityImpl {
 	public List<OtoCloudEventHandlerRegistry> registerEventHandlers() {
 		// TODO Auto-generated method stub
 		List<OtoCloudEventHandlerRegistry> ret = new ArrayList<OtoCloudEventHandlerRegistry>();
+		
+		SKUCreateHandler skuCreateHandler = new SKUCreateHandler(this);
+		ret.add(skuCreateHandler);
 
-		CategoryQueryHandler queryHandler = new CategoryQueryHandler(this);
-		ret.add(queryHandler);	
-
+		SKUQueryHandler skuQueryHandler = new SKUQueryHandler(this);
+		ret.add(skuQueryHandler);
+		
+		SKURemoveHandler skuRemoveHandler = new SKURemoveHandler(this);
+		ret.add(skuRemoveHandler);
+		
+		SKUUpdateHandler skuUpdateHandler = new SKUUpdateHandler(this);
+		ret.add(skuUpdateHandler);
+		
+		SKUFindOneQueryHandler skuFindOneQueryHandler = new SKUFindOneQueryHandler(this);
+		ret.add(skuFindOneQueryHandler);
 		
 		return ret;
 	}

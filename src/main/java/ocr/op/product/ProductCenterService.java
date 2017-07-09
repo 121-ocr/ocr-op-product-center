@@ -3,8 +3,10 @@ package ocr.op.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import ocr.op.product.category.CategoryComponent;
+import ocr.op.product.category.CategoryTreeComponent;
+import ocr.op.product.sku.SKUComponent;
 import ocr.op.product.spu.ProductComponent;
+import ocr.op.product.uom.UOMComponent;
 import otocloud.framework.app.engine.AppServiceImpl;
 import otocloud.framework.app.engine.WebServer;
 import otocloud.framework.app.function.AppActivity;
@@ -36,11 +38,17 @@ public class ProductCenterService extends AppServiceImpl
 	public List<AppActivity> createBizActivities() {
 		List<AppActivity> retActivities = new ArrayList<>();		
 	
-		CategoryComponent catelogComponent = new CategoryComponent();
+		CategoryTreeComponent catelogComponent = new CategoryTreeComponent();
 		retActivities.add(catelogComponent);
+		
+		UOMComponent uomComponent = new UOMComponent();
+		retActivities.add(uomComponent);
 		
 		ProductComponent productComponent = new ProductComponent();
 		retActivities.add(productComponent);
+		
+		SKUComponent skuComponent = new SKUComponent();
+		retActivities.add(skuComponent);		
 
 		return retActivities;
 	}

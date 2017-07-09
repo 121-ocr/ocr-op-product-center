@@ -1,9 +1,10 @@
-package ocr.op.product.category;
+package ocr.op.product.uom;
+
 
 import io.vertx.core.http.HttpMethod;
-import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import otocloud.common.ActionURI;
-import otocloud.common.OtoCloudDirectoryHelper;
+import otocloud.framework.app.common.PagingOptions;
 import otocloud.framework.app.function.ActionDescriptor;
 import otocloud.framework.app.function.ActionHandlerImpl;
 import otocloud.framework.app.function.AppActivityImpl;
@@ -11,15 +12,15 @@ import otocloud.framework.core.CommandMessage;
 import otocloud.framework.core.HandlerDescriptor;
 
 /**
- * TODO: 产品分类树查询
- * @date 2016年11月15日
+ * TODO: 获取所有商品的查询，只支持分页查询
+ * @date 2016年11月26日
  * @author lijing
  */
-public class CategoryQueryHandler extends ActionHandlerImpl<JsonArray> {
+public class UOMQueryHandler extends ActionHandlerImpl<JsonObject> {
 	
-	public static final String ADDRESS = "findtree";
+	public static final String ADDRESS = "findall";
 
-	public CategoryQueryHandler(AppActivityImpl appActivity) {
+	public UOMQueryHandler(AppActivityImpl appActivity) {
 		super(appActivity);
 		// TODO Auto-generated constructor stub
 	}
@@ -33,26 +34,21 @@ public class CategoryQueryHandler extends ActionHandlerImpl<JsonArray> {
 
 	//处理器
 	@Override
-	public void handle(CommandMessage<JsonArray> msg) {
-		
-		String menusFilePath = OtoCloudDirectoryHelper.getConfigDirectory() + "sales_catelogs.json";		
-		
-		this.getAppActivity().getVertx().fileSystem().readFile(menusFilePath, result -> {
-    	    if (result.succeeded()) {
-    	    	String fileContent = result.result().toString(); 
-    	        
-    	    	JsonArray srvCfg = new JsonArray(fileContent);
-    	        msg.reply(srvCfg);     	        
-    	        
-    	    } else {
-				Throwable errThrowable = result.cause();
+	public void handle(CommandMessage<JsonObject> msg) {
+
+		JsonObject queryParams = msg.getContent();
+	    PagingOptions pagingObj = PagingOptions.buildPagingOptions(queryParams);        
+	    this.queryBizDataList(null, appActivity.getBizObjectType(), pagingObj, null, findRet -> {
+	        if (findRet.succeeded()) {
+	            msg.reply(findRet.result());
+	        } else {
+				Throwable errThrowable = findRet.cause();
 				String errMsgString = errThrowable.getMessage();
 				appActivity.getLogger().error(errMsgString, errThrowable);
 				msg.fail(100, errMsgString);		
-   
-    	    }	
-		});
+	        }
 
+	    });
 
 	}
 	
@@ -74,7 +70,7 @@ public class CategoryQueryHandler extends ActionHandlerImpl<JsonArray> {
 		
 		actionDescriptor.getHandlerDescriptor().setParamsDesc(paramsDesc);	*/
 				
-		ActionURI uri = new ActionURI(ADDRESS, HttpMethod.GET);
+		ActionURI uri = new ActionURI(ADDRESS, HttpMethod.POST);
 		handlerDescriptor.setRestApiURI(uri);
 		
 		return actionDescriptor;

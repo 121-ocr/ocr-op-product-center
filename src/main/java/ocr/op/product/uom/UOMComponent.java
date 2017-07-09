@@ -1,4 +1,4 @@
-package ocr.op.product.spu;
+package ocr.op.product.uom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,20 +12,20 @@ import otocloud.framework.core.OtoCloudEventHandlerRegistry;
  * @date 2016年11月26日
  * @author lijing
  */
-public class ProductComponent extends AppActivityImpl {
+public class UOMComponent extends AppActivityImpl {
 
 	//业务活动组件名
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "product-spu";
+		return "product-uom";
 	}
 	
 	//业务活动组件要处理的核心业务对象
 	@Override
 	public String getBizObjectType() {
 		// TODO Auto-generated method stub
-		return "p_ba_product";
+		return "p_ba_uom";
 	}
 
 
@@ -40,23 +40,14 @@ public class ProductComponent extends AppActivityImpl {
 	//业务活动组件中的业务功能
 	@Override
 	public List<OtoCloudEventHandlerRegistry> registerEventHandlers() {
-		// TODO Auto-generated method stub
+
 		List<OtoCloudEventHandlerRegistry> ret = new ArrayList<OtoCloudEventHandlerRegistry>();
 		
-		ProductCreateHandler productCreateHandler = new ProductCreateHandler(this);
-		ret.add(productCreateHandler);
+		UOMFindOneQueryHandler uomFindOneQueryHandler = new UOMFindOneQueryHandler(this);
+		ret.add(uomFindOneQueryHandler);
 
-		ProductQueryHandler queryHandler = new ProductQueryHandler(this);
-		ret.add(queryHandler);
-		
-		ProductRemoveHandler productRemoveHandler = new ProductRemoveHandler(this);
-		ret.add(productRemoveHandler);
-		
-		ProductUpdateHandler productUpdateHandler = new ProductUpdateHandler(this);
-		ret.add(productUpdateHandler);
-		
-		ProductFindOneQueryHandler productFindOneQueryHandler = new ProductFindOneQueryHandler(this);
-		ret.add(productFindOneQueryHandler);
+		UOMQueryHandler uomQueryHandler = new UOMQueryHandler(this);
+		ret.add(uomQueryHandler);
 		
 		return ret;
 	}
